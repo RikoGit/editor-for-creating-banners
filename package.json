@@ -1,0 +1,47 @@
+{
+  "name": "editor-for-creating-banners",
+  "version": "0.0.1",
+  "description": "editor for creating banners",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config configs/webpack.config.js",
+    "start": "npm run build && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RikoGit/editor-for-creating-banners.git"
+  },
+  "keywords": [
+    "banner",
+    "create",
+    "editor",
+    "banner-maker"
+  ],
+  "type": "module",
+  "author": "RikoGit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RikoGit/editor-for-creating-banners/issues"
+  },
+  "homepage": "https://github.com/RikoGit/editor-for-creating-banners#readme",
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-loader": "^8.2.1",
+    "css-loader": "^5.0.1",
+    "eslint-plugin-import": "^2.22.1",
+    "express": "^4.17.1",
+    "file-loader": "^6.2.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.6.0",
+    "webpack-cli": "^4.2.0"
+  }
+}
