@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 
 import Sidebar from "../Sidebar/index.jsx";
 import Preview from "../Preview/index.jsx";
-import Menu from "../Menu/index.jsx";
+//import Menu from "../Menu/index.jsx";
+
 import {
   setBackground,
   setTextValue,
   setTextColor,
   clearPreview,
+  setBackgroundDirection,
+  setBackgroundGradient,
 } from "../../actions.js";
 
 const Main = ({
@@ -17,6 +20,8 @@ const Main = ({
   dispatchSetTextValue,
   dispatchSetTextColor,
   dispatchClearPreview,
+  dispatchSetBackgroundDirection,
+  dispatchSetBackgroundGradient,
 }) => (
   <div className="main">
     <Sidebar
@@ -26,6 +31,8 @@ const Main = ({
       setTextColor={dispatchSetTextColor}
       clearPreview={dispatchClearPreview}
       text={preview.text}
+      setBackgroundDirection={dispatchSetBackgroundDirection}
+      setBackgroundGradient={dispatchSetBackgroundGradient}
     />
     <Preview
       width={preview.width}
@@ -43,4 +50,6 @@ export default connect(mapStateToProps, {
   dispatchSetTextValue: setTextValue,
   dispatchSetTextColor: setTextColor,
   dispatchClearPreview: clearPreview,
+  dispatchSetBackgroundDirection: setBackgroundDirection,
+  dispatchSetBackgroundGradient: setBackgroundGradient,
 })(Main);

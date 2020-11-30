@@ -7,6 +7,8 @@ const Sidebar = ({
   setTextValue,
   setTextColor,
   clearPreview,
+  setBackgroundDirection,
+  setBackgroundGradient,
 }) => (
   <div className="sidebar">
     <button type="button" onClick={clearPreview}>
@@ -33,10 +35,62 @@ const Sidebar = ({
       Фон
       <input
         type="color"
-        value={background}
-        onChange={(event) => setBackground(event.target.value)}
+        value={background.colors[0]}
+        onChange={(event) => setBackground(0, event.target.value)}
       />
     </button>
+    <button type="button">
+      Цвет 2
+      <input
+        type="color"
+        //value={background[1].color}
+        onChange={(event) => setBackground(1, event.target.value)}
+      />
+    </button>
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="direction"
+          value="horizontal"
+          checked={background.direction === "horizontal"}
+          onChange={(event) => setBackgroundDirection(event.target.value)}
+        />
+        горизонтальный градиент
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="direction"
+          value="vertical"
+          checked={background.direction === "vertical"}
+          onChange={(event) => setBackgroundDirection(event.target.value)}
+        />
+        вертикальный градиент
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="gradient"
+          value="linear"
+          checked={background.gradient === "linear"}
+          onChange={(event) => setBackgroundGradient(event.target.value)}
+        />
+        линейный градиент
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="gradient"
+          value="radial"
+          checked={background.gradient === "radial"}
+          onChange={(event) => setBackgroundGradient(event.target.value)}
+        />
+        радиальный градиент
+      </label>
+    </div>
   </div>
 );
 

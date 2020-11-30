@@ -15,7 +15,12 @@ const initialState = {
       color: "#000000",
       value: "",
     },
-    background: "#ffffff",
+    background: {
+      colors: ["#ffffff"],
+      percentages: [0, 1], //???
+      direction: "horizontal",
+      gradient: "linear",
+    },
   },
 };
 

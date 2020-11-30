@@ -3,6 +3,8 @@ import {
   SET_BACKGROUND,
   SET_TEXT_VALUE,
   SET_TEXT_COLOR,
+  SET_BACKGROUND_DIRECTION,
+  SET_BACKGROUND_GRADIENT,
 } from "./actions.js";
 
 export default (state, { type, payload }) => {
@@ -12,14 +14,46 @@ export default (state, { type, payload }) => {
         ...state,
         preview: {
           ...state.preview,
-          background: "#ffffff",
+          background: { ...state.preview.background, colors: ["#ffffff"] },
           text: { ...state.preview.text, value: "", color: "#000000" },
         },
       };
     }
 
     case SET_BACKGROUND: {
-      return { ...state, preview: { ...state.preview, background: payload } };
+      const colors = [...state.preview.background.colors];
+      colors[payload.index] = payload.color;
+
+      //const persentages = [...state.preview.background.persentages];
+      //colors[payload.index] = payload.color;
+
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          background: { ...state.preview.background, colors },
+        },
+      };
+    }
+
+    case SET_BACKGROUND_GRADIENT: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          background: { ...state.preview.background, gradient: payload },
+        },
+      };
+    }
+
+    case SET_BACKGROUND_DIRECTION: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          background: { ...state.preview.background, direction: payload },
+        },
+      };
     }
 
     case SET_TEXT_VALUE: {
