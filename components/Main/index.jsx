@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Sidebar from "../Sidebar/index.jsx";
 import Preview from "../Preview/index.jsx";
-//import Menu from "../Menu/index.jsx";
+import image from "../../utils.js";
 
 import {
   setBackground,
@@ -12,6 +12,8 @@ import {
   clearPreview,
   setBackgroundDirection,
   setBackgroundGradient,
+  setImage,
+  imageLoaded,
 } from "../../actions.js";
 
 const Main = ({
@@ -22,21 +24,29 @@ const Main = ({
   dispatchClearPreview,
   dispatchSetBackgroundDirection,
   dispatchSetBackgroundGradient,
+  dispatchSetImage,
+  dispatchImageLoaded,
 }) => (
   <div className="main">
     <Sidebar
+      image={image}
+      imageLoaded={dispatchImageLoaded}
+      src={preview.image}
       background={preview.background}
+      text={preview.text}
       setBackground={dispatchSetBackground}
       setTextValue={dispatchSetTextValue}
       setTextColor={dispatchSetTextColor}
       clearPreview={dispatchClearPreview}
-      text={preview.text}
+      setImage={dispatchSetImage}
       setBackgroundDirection={dispatchSetBackgroundDirection}
       setBackgroundGradient={dispatchSetBackgroundGradient}
     />
     <Preview
       width={preview.width}
       height={preview.height}
+      image={image}
+      imageIsLoaded={preview.imageIsLoaded}
       text={preview.text}
       background={preview.background}
     />
@@ -49,6 +59,8 @@ export default connect(mapStateToProps, {
   dispatchSetBackground: setBackground,
   dispatchSetTextValue: setTextValue,
   dispatchSetTextColor: setTextColor,
+  dispatchSetImage: setImage,
+  dispatchImageLoaded: imageLoaded,
   dispatchClearPreview: clearPreview,
   dispatchSetBackgroundDirection: setBackgroundDirection,
   dispatchSetBackgroundGradient: setBackgroundGradient,

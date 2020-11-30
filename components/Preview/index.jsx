@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 
 import Menu from "../Menu/index.jsx";
 
-const Preview = ({ width, height, text, background }) => {
+const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
   const canvasRef = useRef(null);
   const downloadRef = useRef(null);
 
@@ -26,6 +26,12 @@ const Preview = ({ width, height, text, background }) => {
     }
     ctx.fillRect(0, 0, width, height);
     ctx.fillStyle = text.color;
+    console.log("imageIsLoaded", imageIsLoaded);
+
+    if (imageIsLoaded) {
+      console.log(`image = ${image}`);
+      ctx.drawImage(image, 0, 0);
+    }
     ctx.font = `${text.fontSize} ${text.fontFamily}`;
     ctx.fillText(text.value, 20, 50, 260);
   };
@@ -41,7 +47,7 @@ const Preview = ({ width, height, text, background }) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext(`2d`);
     drawPreview(ctx);
-  }, [background, text]);
+  }, [background, text, imageIsLoaded]);
 
   return (
     <div className="main">

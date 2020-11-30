@@ -6,7 +6,8 @@ const initialState = {
   preview: {
     width: 300,
     height: 400,
-    illustration: "",
+    image: "",
+    imageIsLoaded: false,
     text: {
       fontSize: "18px",
       lineHeight: "20px",

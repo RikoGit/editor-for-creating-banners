@@ -1,6 +1,8 @@
 import {
   CLEAR_PREVIEW,
   SET_BACKGROUND,
+  SET_IMAGE,
+  IMAGE_LOADED,
   SET_TEXT_VALUE,
   SET_TEXT_COLOR,
   SET_BACKGROUND_DIRECTION,
@@ -72,6 +74,26 @@ export default (state, { type, payload }) => {
         preview: {
           ...state.preview,
           text: { ...state.preview.text, color: payload },
+        },
+      };
+    }
+
+    case SET_IMAGE: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          image: payload,
+        },
+      };
+    }
+
+    case IMAGE_LOADED: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          imageIsLoaded: payload,
         },
       };
     }
