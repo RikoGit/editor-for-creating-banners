@@ -1,3 +1,2 @@
-const image = new Image();
-
-export default image;
+export const image = new Image();
+image.crossOrigin = "anonymous";

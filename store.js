@@ -8,6 +8,7 @@ const initialState = {
     height: 400,
     image: "",
     imageIsLoaded: false,
+    imageHasError: false,
     text: {
       fontSize: "18px",
       lineHeight: "20px",

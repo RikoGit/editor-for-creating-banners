@@ -7,6 +7,7 @@ import {
   SET_TEXT_COLOR,
   SET_BACKGROUND_DIRECTION,
   SET_BACKGROUND_GRADIENT,
+  SET_IMAGE_HAS_ERROR,
 } from "./actions.js";
 
 export default (state, { type, payload }) => {
@@ -94,6 +95,16 @@ export default (state, { type, payload }) => {
         preview: {
           ...state.preview,
           imageIsLoaded: payload,
+        },
+      };
+    }
+
+    case SET_IMAGE_HAS_ERROR: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          imageHasError: payload,
         },
       };
     }

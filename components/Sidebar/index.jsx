@@ -3,6 +3,8 @@ import React from "react";
 const Sidebar = ({
   src,
   image,
+  imageLoaded,
+  imageHasError,
   background,
   text,
   setBackground,
@@ -12,20 +14,25 @@ const Sidebar = ({
   setBackgroundDirection,
   setBackgroundGradient,
   setImage,
-  imageLoaded,
+  setImageHasError,
 }) => {
   const uploadImage = () => {
     if (!src) return;
 
-    // Привязываем функцию к событию onload
-    // Это указывает браузеру, что делать, когда изображение загружено
-    image.onload = () => {
-      imageLoaded(true);
-      console.log("dfsd");
+    image.onload = () => imageLoaded(true);
+
+    image.onerror = (error) => {
+      console.log(error);
+      setImageHasError(true);
     };
-    // Загружаем файл изображения
-    image.src = src;
+
+    try {
+      image.src = src;
+    } catch {
+      console.log("Error");
+    }
     imageLoaded(false);
+    setImageHasError(false);
   };
 
   return (
@@ -40,6 +47,7 @@ const Sidebar = ({
         value={src}
         onChange={(event) => setImage(event.target.value)}
       ></input>
+      <div>{imageHasError && "ошибка при загрузке картинки"}</div>
       <button type="button" onClick={uploadImage}>
         Загрузить картинку
       </button>

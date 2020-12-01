@@ -6,6 +6,7 @@ export const SET_TEXT_COLOR = "SET_TEXT_COLOR";
 export const SET_BACKGROUND_DIRECTION = "SET_BACKGROUND_DIRECTION";
 export const SET_BACKGROUND_GRADIENT = "SET_BACKGROUND_GRADIENT";
 export const IMAGE_LOADED = "IMAGE_LOADED";
+export const SET_IMAGE_HAS_ERROR = "SET_IMAGE_HAS_ERROR";
 
 export const clearPreview = () => ({ type: CLEAR_PREVIEW });
 
@@ -26,6 +27,11 @@ export const setImage = (value) => ({
 
 export const imageLoaded = (value) => ({
   type: IMAGE_LOADED,
+  payload: value,
+});
+
+export const setImageHasError = (value) => ({
+  type: SET_IMAGE_HAS_ERROR,
   payload: value,
 });
 

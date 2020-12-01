@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Sidebar from "../Sidebar/index.jsx";
 import Preview from "../Preview/index.jsx";
-import image from "../../utils.js";
+import { image } from "../../utils.js";
 
 import {
   setBackground,
@@ -14,6 +14,7 @@ import {
   setBackgroundGradient,
   setImage,
   imageLoaded,
+  setImageHasError,
 } from "../../actions.js";
 
 const Main = ({
@@ -26,11 +27,13 @@ const Main = ({
   dispatchSetBackgroundGradient,
   dispatchSetImage,
   dispatchImageLoaded,
+  dispatchSetImageHasError,
 }) => (
   <div className="main">
     <Sidebar
       image={image}
       imageLoaded={dispatchImageLoaded}
+      imageHasError={preview.imageHasError}
       src={preview.image}
       background={preview.background}
       text={preview.text}
@@ -41,6 +44,7 @@ const Main = ({
       setImage={dispatchSetImage}
       setBackgroundDirection={dispatchSetBackgroundDirection}
       setBackgroundGradient={dispatchSetBackgroundGradient}
+      setImageHasError={dispatchSetImageHasError}
     />
     <Preview
       width={preview.width}
@@ -64,4 +68,5 @@ export default connect(mapStateToProps, {
   dispatchClearPreview: clearPreview,
   dispatchSetBackgroundDirection: setBackgroundDirection,
   dispatchSetBackgroundGradient: setBackgroundGradient,
+  dispatchSetImageHasError: setImageHasError,
 })(Main);
