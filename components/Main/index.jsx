@@ -19,6 +19,7 @@ import {
   setImageControl,
   setTextControl,
   setBackgroundControl,
+  addBackgroundColor,
 } from "../../actions.js";
 
 const Main = ({
@@ -38,6 +39,7 @@ const Main = ({
   dispatchSetTextControl,
   dispatchSetImageControl,
   dispatchSetBackgroundControl,
+  dispatchAddBackgroundColor,
 }) => (
   <div className="main">
     <header className="header">
@@ -62,6 +64,7 @@ const Main = ({
         imageControlIsActive={imageControlIsActive}
         backgroundControlIsActive={backgroundControlIsActive}
         textControlIsActive={textControlIsActive}
+        addBackgroundColor={dispatchAddBackgroundColor}
       />
     </header>
     <Preview
@@ -90,4 +93,5 @@ export default connect(mapStateToProps, {
   dispatchSetImageControl: setImageControl,
   dispatchSetBackgroundControl: setBackgroundControl,
   dispatchSetTextControl: setTextControl,
+  dispatchAddBackgroundColor: addBackgroundColor,
 })(Main);

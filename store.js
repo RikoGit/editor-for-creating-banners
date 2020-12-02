@@ -22,7 +22,8 @@ const initialState = {
     },
     background: {
       colors: ["#ffffff"],
-      percentages: [0, 1], //???
+      colorsLengthMax: 2,
+      percentages: [0, 1],
       direction: "horizontal",
       gradient: "linear",
     },

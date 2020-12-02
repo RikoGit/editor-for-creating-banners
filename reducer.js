@@ -11,6 +11,7 @@ import {
   SET_IMAGE_CONTROL,
   SET_BACKGROUND_CONTROL,
   SET_TEXT_CONTROL,
+  ADD_BACKGROUND_COLOR,
 } from "./actions.js";
 
 export default (state, { type, payload }) => {
@@ -30,6 +31,19 @@ export default (state, { type, payload }) => {
     case SET_BACKGROUND: {
       const colors = [...state.preview.background.colors];
       colors[payload.index] = payload.color;
+
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          background: { ...state.preview.background, colors },
+        },
+      };
+    }
+
+    case ADD_BACKGROUND_COLOR: {
+      const colors = [...state.preview.background.colors];
+      colors.push("#ffffff"); //???
 
       //const persentages = [...state.preview.background.persentages];
       //colors[payload.index] = payload.color;
