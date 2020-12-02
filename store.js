@@ -3,6 +3,9 @@ import { createStore } from "redux";
 import reducer from "./reducer.js";
 
 const initialState = {
+  imageControlIsActive: false,
+  backgroundControlIsActive: false,
+  textControlIsActive: false,
   preview: {
     width: 300,
     height: 400,

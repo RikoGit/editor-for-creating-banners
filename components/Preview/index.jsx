@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
-import Menu from "../Menu/index.jsx";
+import Header from "../Header/index.jsx";
+import "./styles.scss";
 
 const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
   const canvasRef = useRef(null);
@@ -26,10 +27,8 @@ const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
     }
     ctx.fillRect(0, 0, width, height);
     ctx.fillStyle = text.color;
-    console.log("imageIsLoaded", imageIsLoaded);
 
     if (imageIsLoaded) {
-      console.log(`image = ${image}`);
       ctx.drawImage(image, 0, 0);
     }
     ctx.font = `${text.fontSize} ${text.fontFamily}`;
@@ -50,12 +49,14 @@ const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
   }, [background, text, imageIsLoaded]);
 
   return (
-    <div className="main">
-      <canvas id="canvas" width={width} height={height} ref={canvasRef}>
-        Браузер не поддерживает Canvas
-      </canvas>
-      <Menu downloadPreview={downloadPreview} downloadRef={downloadRef} />
-    </div>
+    <>
+      {/*<Header downloadPreview={downloadPreview} downloadRef={downloadRef} />*/}
+      <div className="preview">
+        <canvas id="canvas" width={width} height={height} ref={canvasRef}>
+          Браузер не поддерживает Canvas
+        </canvas>
+      </div>
+    </>
   );
 };
 

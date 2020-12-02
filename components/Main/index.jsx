@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Sidebar from "../Sidebar/index.jsx";
+import Controls from "../ Controls/index.jsx";
 import Preview from "../Preview/index.jsx";
 import { image } from "../../utils.js";
+import "./styles.scss";
 
 import {
   setBackground,
@@ -15,9 +16,15 @@ import {
   setImage,
   imageLoaded,
   setImageHasError,
+  setImageControl,
+  setTextControl,
+  setBackgroundControl,
 } from "../../actions.js";
 
 const Main = ({
+  backgroundControlIsActive,
+  textControlIsActive,
+  imageControlIsActive,
   preview,
   dispatchSetBackground,
   dispatchSetTextValue,
@@ -28,24 +35,35 @@ const Main = ({
   dispatchSetImage,
   dispatchImageLoaded,
   dispatchSetImageHasError,
+  dispatchSetTextControl,
+  dispatchSetImageControl,
+  dispatchSetBackgroundControl,
 }) => (
   <div className="main">
-    <Sidebar
-      image={image}
-      imageLoaded={dispatchImageLoaded}
-      imageHasError={preview.imageHasError}
-      src={preview.image}
-      background={preview.background}
-      text={preview.text}
-      setBackground={dispatchSetBackground}
-      setTextValue={dispatchSetTextValue}
-      setTextColor={dispatchSetTextColor}
-      clearPreview={dispatchClearPreview}
-      setImage={dispatchSetImage}
-      setBackgroundDirection={dispatchSetBackgroundDirection}
-      setBackgroundGradient={dispatchSetBackgroundGradient}
-      setImageHasError={dispatchSetImageHasError}
-    />
+    <header className="header">
+      <Controls
+        image={image}
+        imageLoaded={dispatchImageLoaded}
+        imageHasError={preview.imageHasError}
+        src={preview.image}
+        background={preview.background}
+        text={preview.text}
+        setBackground={dispatchSetBackground}
+        setTextValue={dispatchSetTextValue}
+        setTextColor={dispatchSetTextColor}
+        clearPreview={dispatchClearPreview}
+        setImage={dispatchSetImage}
+        setBackgroundDirection={dispatchSetBackgroundDirection}
+        setBackgroundGradient={dispatchSetBackgroundGradient}
+        setImageHasError={dispatchSetImageHasError}
+        setImageControl={dispatchSetImageControl}
+        setBackgroundControl={dispatchSetBackgroundControl}
+        setTextControl={dispatchSetTextControl}
+        imageControlIsActive={imageControlIsActive}
+        backgroundControlIsActive={backgroundControlIsActive}
+        textControlIsActive={textControlIsActive}
+      />
+    </header>
     <Preview
       width={preview.width}
       height={preview.height}
@@ -69,4 +87,7 @@ export default connect(mapStateToProps, {
   dispatchSetBackgroundDirection: setBackgroundDirection,
   dispatchSetBackgroundGradient: setBackgroundGradient,
   dispatchSetImageHasError: setImageHasError,
+  dispatchSetImageControl: setImageControl,
+  dispatchSetBackgroundControl: setBackgroundControl,
+  dispatchSetTextControl: setTextControl,
 })(Main);

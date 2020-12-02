@@ -1,6 +1,8 @@
 import React from "react";
 
-const Menu = ({ downloadPreview, downloadRef }) => (
+import "./styles.scss";
+
+const Header = ({ downloadPreview, downloadRef }) => (
   <div className="menu">
     <a
       download="preview.png"
@@ -24,4 +26,4 @@ const Menu = ({ downloadPreview, downloadRef }) => (
   </div>
 );
 
-export default Menu;
+export default Header;

@@ -5,4 +5,10 @@ body {
 }
 .main {
   margin: 0 auto;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  min-height: 100vh;
+}
+.header {
+  height: 100px;
 }
