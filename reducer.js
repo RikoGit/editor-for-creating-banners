@@ -12,6 +12,7 @@ import {
   SET_BACKGROUND_CONTROL,
   SET_TEXT_CONTROL,
   ADD_BACKGROUND_COLOR,
+  SET_FONT_SIZE,
 } from "./actions.js";
 
 export default (state, { type, payload }) => {
@@ -24,6 +25,16 @@ export default (state, { type, payload }) => {
           background: { ...state.preview.background, colors: ["#ffffff"] },
           text: { ...state.preview.text, value: "", color: "#000000" },
           image: "",
+        },
+      };
+    }
+
+    case SET_FONT_SIZE: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          text: { ...state.preview.text, fontSize: payload },
         },
       };
     }

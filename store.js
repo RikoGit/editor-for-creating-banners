@@ -3,7 +3,7 @@ import { createStore } from "redux";
 import reducer from "./reducer.js";
 
 const initialState = {
-  imageControlIsActive: false,
+  imageControlIsActive: true,
   backgroundControlIsActive: false,
   textControlIsActive: false,
   preview: {
@@ -13,8 +13,9 @@ const initialState = {
     imageIsLoaded: false,
     imageHasError: false,
     text: {
-      fontSize: "18px",
-      lineHeight: "20px",
+      fonts: [8, 10, 12, 14, 16, 18, 20, 24, 28, 30, 36, 40, 46, 52, 58, 60],
+      fontSize: 30,
+      lineHeight: 30,
       fontStyle: "normal",
       fontFamily: "sans-serif",
       color: "#000000",

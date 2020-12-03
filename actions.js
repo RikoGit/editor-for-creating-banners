@@ -11,6 +11,7 @@ export const ADD_BACKGROUND_COLOR = "ADD_BACKGROUND_COLOR";
 export const SET_IMAGE_CONTROL = "SET_IMAGE_CONTROL";
 export const SET_BACKGROUND_CONTROL = "SET_BACKGROUND_CONTROL";
 export const SET_TEXT_CONTROL = "SET_TEXT_CONTROL";
+export const SET_FONT_SIZE = "SET_FONT_SIZE";
 
 export const clearPreview = () => ({ type: CLEAR_PREVIEW });
 export const setBackgroundControl = () => ({ type: SET_BACKGROUND_CONTROL });
@@ -22,6 +23,11 @@ export const addBackgroundColor = () => ({ type: ADD_BACKGROUND_COLOR });
 export const setBackground = (index, color) => ({
   type: SET_BACKGROUND,
   payload: { index, color },
+});
+
+export const setFontSize = (value) => ({
+  type: SET_FONT_SIZE,
+  payload: value,
 });
 
 export const setTextValue = (value) => ({

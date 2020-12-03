@@ -1,4 +1,11 @@
 .controls {
+  $color: #5d6d77;
+  $buttonBackground: #e7ebec;
+  $buttonActiveBackground: #6495ed;
+  $buttonColor: #000;
+  $buttonActiveColor: #fff;
+  $buttonHeight: 40px;
+
   width: 100%;
   height: 100%;
   box-shadow: 10px 0 10px #737d8a;
@@ -19,15 +26,33 @@
   }
 
   &__more {
-    height: 70px;
-    background: #5d6d77;
+    display: none;
+    height: 75px;
+    background: $color;
     justify-content: center;
     align-items: center;
+
+    &_active {
+      display: flex;
+    }
+  }
+
+  &__main &__button {
+    border: none;
+    padding: 0 10px;
+    font-size: 14px;
+    &:focus,
+    &:active,
+    &:hover {
+      border: none;
+    }
   }
 
   &__more &__button {
     margin: 0 5px;
-    height: 40px;
+    height: $buttonHeight;
+    background: $buttonBackground;
+    color: $buttonColor;
   }
 
   &__detail {
@@ -50,6 +75,41 @@
     color: red;
   }
 
+  &__gradient {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__gradient &__label {
+    padding: 0 10px;
+    display: inline-block;
+    cursor: pointer;
+    height: 30px;
+    font-size: 14px;
+    line-height: 30px;
+    background: $buttonBackground;
+
+    &_active {
+      background: $buttonActiveBackground;
+      color: $buttonActiveColor;
+      cursor: default;
+    }
+  }
+
+  &__radiogroup {
+    margin: 2px 5px;
+  }
+
+  &__radiogroup_type_disable &__label {
+    background: transparent;
+    cursor: default;
+    color: #8c969a;
+  }
+
+  &__gradient &__radio {
+    display: none;
+  }
+
   &__label {
     position: relative;
     padding: 10px 0;
@@ -64,13 +124,17 @@
   }
 
   &__input {
-    margin: 5px;
     width: 300px;
+  }
+
+  &__input,
+  &__select {
+    margin: 5px;
     font-size: 16px;
     line-height: 16px;
     font-weight: 300;
     color: #000;
-    height: 40px;
+    height: $buttonHeight;
     border: 2px solid #e8e8e8;
     background: #fff;
     padding: 0 10px;
@@ -94,6 +158,9 @@
   &__button {
     cursor: pointer;
     height: 50px;
+    outline: none;
+    border-color: transparent;
+    background: $buttonBackground;
 
     &_type_create {
       position: absolute;
@@ -101,19 +168,29 @@
     }
 
     &_type_add {
-      width: 40px;
       font-size: 26px;
+      line-height: 26px;
     }
 
     &_type_active {
-      background: cornflowerblue;
+      background: $color;
+      color: $buttonActiveColor;
+      border-color: transparent;
+      outline: none;
+      &:focus,
+      &:active {
+        background: $color;
+        border-color: transparent;
+        outline: none;
+      }
     }
   }
 
   &__color {
     margin: 0 5px;
-    width: 40px;
-    height: 40px;
+    padding: 0;
+    height: $buttonHeight;
+    border-radius: 0;
     box-sizing: border-box;
     cursor: pointer;
   }

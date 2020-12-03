@@ -14,7 +14,7 @@ const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
       let grd = ctx.createLinearGradient(0, 0, width, 0);
 
       if (background.gradient === "radial") {
-        grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+        grd = ctx.createRadialGradient(150, 200, 10, 160, 200, 400);
       } else if (background.direction === "vertical") {
         grd = ctx.createLinearGradient(0, 0, 0, height);
       }
@@ -31,7 +31,7 @@ const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
     if (imageIsLoaded) {
       ctx.drawImage(image, 0, 0);
     }
-    ctx.font = `${text.fontSize} ${text.fontFamily}`;
+    ctx.font = `${text.fontSize}px ${text.fontFamily}`;
     ctx.fillText(text.value, 20, 50, 260);
   };
 
@@ -55,6 +55,7 @@ const Preview = ({ width, height, text, background, imageIsLoaded, image }) => {
         <canvas id="canvas" width={width} height={height} ref={canvasRef}>
           Браузер не поддерживает Canvas
         </canvas>
+        {image.width}
       </div>
     </>
   );

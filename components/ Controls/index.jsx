@@ -24,6 +24,7 @@ const Controls = ({
   setImageControl,
   setTextControl,
   setBackgroundControl,
+  setFontSize,
 }) => {
   const uploadImage = () => {
     if (!src) return;
@@ -54,42 +55,43 @@ const Controls = ({
         >
           Создать новый
         </button>
-        <div className="">
-          <button
-            type="button"
-            className={`controls__button${
-              imageControlIsActive ? " controls__button_type_active" : ""
-            }`}
-            onClick={setImageControl}
-          >
-            Иллюстрация
-          </button>
-          <button
-            type="button"
-            className={`controls__button${
-              textControlIsActive ? " controls__button_type_active" : ""
-            }`}
-            onClick={setTextControl}
-          >
-            Текст
-          </button>
-          <button
-            type="button"
-            className={`controls__button${
-              backgroundControlIsActive ? " controls__button_type_active" : ""
-            }`}
-            onClick={setBackgroundControl}
-          >
-            Фон
-          </button>
-        </div>
-        <div className="">
-          <button type="button" className="controls__button">
-            Скачать
-          </button>
-        </div>
+        <button
+          type="button"
+          className={`controls__button${
+            imageControlIsActive ? " controls__button_type_active" : ""
+          }`}
+          onClick={setImageControl}
+        >
+          Иллюстрация
+        </button>
+        <button
+          type="button"
+          className={`controls__button${
+            textControlIsActive ? " controls__button_type_active" : ""
+          }`}
+          onClick={setTextControl}
+        >
+          Текст
+        </button>
+        <button
+          type="button"
+          className={`controls__button${
+            backgroundControlIsActive ? " controls__button_type_active" : ""
+          }`}
+          onClick={setBackgroundControl}
+        >
+          Фон
+        </button>
       </div>
-      <div className="controls__more">
+      <div
+        className={`controls__more${
+          imageControlIsActive ||
+          backgroundControlIsActive ||
+          textControlIsActive
+            ? " controls__more_active"
+            : ""
+        }`}
+      >
         <div
           className={`controls__detail${
             imageControlIsActive ? " controls__detail_type_active" : ""
@@ -132,15 +134,16 @@ const Controls = ({
             value={text.value}
             onChange={(event) => setTextValue(event.target.value)}
           ></input>
-          <button
+          <select
             type="button"
-            className="controls__button controls__button_type_add"
-            title="Добавить строку"
+            className="controls__select"
+            onChange={(event) => setFontSize(event.target.value)}
+            value={text.fontSize}
           >
-            +
-          </button>
-
-          {/*<span className="controls__note">не более 3 строк текста</span>*/}
+            {text.fonts.map((font) => (
+              <option>{font}</option>
+            ))}
+          </select>
           <input
             className="controls__color"
             type="color"
@@ -177,12 +180,18 @@ const Controls = ({
             <div
               className={`controls__gradient${
                 background.gradient === "linear"
-                  ? "controls__gradient_type_linear"
+                  ? " controls__gradient_type_linear"
                   : ""
               }`}
             >
-              <div>
-                <label>
+              <div className="controls__radiogroup">
+                <label
+                  className={`controls__label${
+                    background.gradient === "linear"
+                      ? " controls__label_active"
+                      : ""
+                  }`}
+                >
                   <input
                     className="controls__radio"
                     type="radio"
@@ -195,7 +204,13 @@ const Controls = ({
                   />
                   линейный
                 </label>
-                <label>
+                <label
+                  className={`controls__label${
+                    background.gradient === "radial"
+                      ? " controls__label_active"
+                      : ""
+                  }`}
+                >
                   <input
                     className="controls__radio"
                     type="radio"
@@ -209,8 +224,20 @@ const Controls = ({
                   радиальный
                 </label>
               </div>
-              <div className="controls__">
-                <label>
+              <div
+                className={`controls__radiogroup ${
+                  background.gradient === "radial"
+                    ? "controls__radiogroup_type_disable"
+                    : ""
+                }`}
+              >
+                <label
+                  className={`controls__label${
+                    background.direction === "horizontal"
+                      ? " controls__label_active"
+                      : ""
+                  }`}
+                >
                   <input
                     className="controls__radio"
                     type="radio"
@@ -223,7 +250,13 @@ const Controls = ({
                   />
                   горизонтальный
                 </label>
-                <label>
+                <label
+                  className={`controls__label${
+                    background.direction === "vertical"
+                      ? " controls__label_active"
+                      : ""
+                  }`}
+                >
                   <input
                     className="controls__radio"
                     type="radio"
