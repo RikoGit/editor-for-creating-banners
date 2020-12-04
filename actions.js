@@ -1,19 +1,20 @@
-export const CLEAR_PREVIEW = "CLEAR_PREVIEW";
+export const ADD_BACKGROUND_COLOR = "ADD_BACKGROUND_COLOR";
+export const IMAGE_LOADED = "IMAGE_LOADED";
 export const SET_BACKGROUND = "SET_BACKGROUND";
-export const SET_TEXT_VALUE = "SET_TEXT_VALUE";
-export const SET_IMAGE = "SET_IMAGE";
-export const SET_TEXT_COLOR = "SET_TEXT_COLOR";
+export const SET_BACKGROUND_CONTROL = "SET_BACKGROUND_CONTROL";
 export const SET_BACKGROUND_DIRECTION = "SET_BACKGROUND_DIRECTION";
 export const SET_BACKGROUND_GRADIENT = "SET_BACKGROUND_GRADIENT";
-export const IMAGE_LOADED = "IMAGE_LOADED";
-export const SET_IMAGE_HAS_ERROR = "SET_IMAGE_HAS_ERROR";
-export const ADD_BACKGROUND_COLOR = "ADD_BACKGROUND_COLOR";
+export const SET_IMAGE = "SET_IMAGE";
 export const SET_IMAGE_CONTROL = "SET_IMAGE_CONTROL";
-export const SET_BACKGROUND_CONTROL = "SET_BACKGROUND_CONTROL";
-export const SET_TEXT_CONTROL = "SET_TEXT_CONTROL";
+export const SET_IMAGE_HAS_ERROR = "SET_IMAGE_HAS_ERROR";
+export const SET_IMAGE_SIZE = "SET_IMAGE_SIZE";
+export const SET_INITIAL_PREVIEW = "SET_INITIAL_PREVIEW";
 export const SET_FONT_SIZE = "SET_FONT_SIZE";
+export const SET_TEXT_COLOR = "SET_TEXT_COLOR";
+export const SET_TEXT_CONTROL = "SET_TEXT_CONTROL";
+export const SET_TEXT_VALUE = "SET_TEXT_VALUE";
 
-export const clearPreview = () => ({ type: CLEAR_PREVIEW });
+export const setInitialPreview = () => ({ type: SET_INITIAL_PREVIEW });
 export const setBackgroundControl = () => ({ type: SET_BACKGROUND_CONTROL });
 export const setImageControl = () => ({ type: SET_IMAGE_CONTROL });
 export const setTextControl = () => ({ type: SET_TEXT_CONTROL });
@@ -28,6 +29,11 @@ export const setBackground = (index, color) => ({
 export const setFontSize = (value) => ({
   type: SET_FONT_SIZE,
   payload: value,
+});
+
+export const setImageSize = (width, height) => ({
+  type: SET_IMAGE_SIZE,
+  payload: { width, height },
 });
 
 export const setTextValue = (value) => ({

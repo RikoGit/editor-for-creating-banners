@@ -1,5 +1,5 @@
 import {
-  CLEAR_PREVIEW,
+  SET_INITIAL_PREVIEW,
   SET_BACKGROUND,
   SET_IMAGE,
   IMAGE_LOADED,
@@ -13,18 +13,20 @@ import {
   SET_TEXT_CONTROL,
   ADD_BACKGROUND_COLOR,
   SET_FONT_SIZE,
+  SET_IMAGE_SIZE,
 } from "./actions.js";
+import { initialPreview } from "./initialPreview.js";
 
 export default (state, { type, payload }) => {
   switch (type) {
-    case CLEAR_PREVIEW: {
+    case SET_INITIAL_PREVIEW: {
       return {
         ...state,
         preview: {
-          ...state.preview,
-          background: { ...state.preview.background, colors: ["#ffffff"] },
-          text: { ...state.preview.text, value: "", color: "#000000" },
-          image: "",
+          ...initialPreview,
+          image: { ...initialPreview.image },
+          text: { ...initialPreview.text },
+          background: { ...initialPreview.background },
         },
       };
     }
@@ -34,7 +36,24 @@ export default (state, { type, payload }) => {
         ...state,
         preview: {
           ...state.preview,
-          text: { ...state.preview.text, fontSize: payload },
+          text: {
+            ...state.preview.text,
+            fontSize: payload,
+          },
+        },
+      };
+    }
+
+    case SET_IMAGE_SIZE: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          image: {
+            ...state.preview.image,
+            width: payload.width,
+            height: payload.height,
+          },
         },
       };
     }
@@ -54,16 +73,15 @@ export default (state, { type, payload }) => {
 
     case ADD_BACKGROUND_COLOR: {
       const colors = [...state.preview.background.colors];
-      colors.push("#ffffff"); //???
-
-      //const persentages = [...state.preview.background.persentages];
-      //colors[payload.index] = payload.color;
+      const percentages = [...state.preview.background.percentages];
+      colors.push("#ffffff");
+      percentages.push(1);
 
       return {
         ...state,
         preview: {
           ...state.preview,
-          background: { ...state.preview.background, colors },
+          background: { ...state.preview.background, colors, percentages },
         },
       };
     }
@@ -140,7 +158,7 @@ export default (state, { type, payload }) => {
         ...state,
         preview: {
           ...state.preview,
-          image: payload,
+          image: { ...state.preview.image, src: payload },
         },
       };
     }
@@ -150,7 +168,7 @@ export default (state, { type, payload }) => {
         ...state,
         preview: {
           ...state.preview,
-          imageIsLoaded: payload,
+          image: { ...state.preview.image, isLoaded: payload },
         },
       };
     }
@@ -160,7 +178,7 @@ export default (state, { type, payload }) => {
         ...state,
         preview: {
           ...state.preview,
-          imageHasError: payload,
+          image: { ...state.preview.image, hasError: payload },
         },
       };
     }

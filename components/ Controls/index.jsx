@@ -6,16 +6,14 @@ const Controls = ({
   imageControlIsActive,
   backgroundControlIsActive,
   textControlIsActive,
-  src,
-  image,
+  img,
+  preview,
+  fonts,
+  backgroundColorsLengthMax,
   imageLoaded,
-  imageHasError,
-  background,
-  text,
   setBackground,
   setTextValue,
   setTextColor,
-  clearPreview,
   setBackgroundDirection,
   setBackgroundGradient,
   addBackgroundColor,
@@ -26,18 +24,20 @@ const Controls = ({
   setBackgroundControl,
   setFontSize,
 }) => {
+  const { text, image, background } = preview;
+
   const uploadImage = () => {
-    if (!src) return;
+    if (!image.src) return;
 
-    image.onload = () => imageLoaded(true);
+    img.onload = () => imageLoaded(true);
 
-    image.onerror = (error) => {
+    img.onerror = (error) => {
       console.log(error);
       setImageHasError(true);
     };
 
     try {
-      image.src = src;
+      img.src = image.src;
     } catch {
       console.log("Error");
     }
@@ -48,13 +48,6 @@ const Controls = ({
   return (
     <div className="controls">
       <div className="controls__main">
-        <button
-          type="button"
-          className="controls__button controls__button_type_create"
-          onClick={clearPreview}
-        >
-          Создать новый
-        </button>
         <button
           type="button"
           className={`controls__button${
@@ -99,14 +92,14 @@ const Controls = ({
         >
           <label
             className={`controls__label${
-              imageHasError ? " controls__label_type_error" : ""
+              image.hasError ? " controls__label_type_error" : ""
             }`}
           >
             <input
               className="controls__input"
               type="text"
               placeholder="Введите url"
-              value={src}
+              value={image.src}
               onChange={(event) => setImage(event.target.value)}
             ></input>
             <span className="controls__note">ссылка или dataURI</span>
@@ -127,20 +120,23 @@ const Controls = ({
             textControlIsActive ? " controls__detail_type_active" : ""
           }`}
         >
-          <input
-            className="controls__input"
-            type="text"
-            placeholder="Введите текст"
-            value={text.value}
-            onChange={(event) => setTextValue(event.target.value)}
-          ></input>
+          <label className="controls__label">
+            <span className="controls__note">не более 3 строк</span>
+            <input
+              className="controls__input"
+              type="text"
+              placeholder="Введите текст"
+              value={text.value}
+              onChange={(event) => setTextValue(event.target.value)}
+            ></input>
+          </label>
           <select
             type="button"
             className="controls__select"
             onChange={(event) => setFontSize(event.target.value)}
             value={text.fontSize}
           >
-            {text.fonts.map((font) => (
+            {fonts.map((font) => (
               <option>{font}</option>
             ))}
           </select>
@@ -165,7 +161,7 @@ const Controls = ({
             />
           ))}
 
-          {background.colors.length < background.colorsLengthMax && (
+          {background.colors.length < backgroundColorsLengthMax && (
             <button
               type="button"
               className="controls__button controls__button_type_add"

@@ -3,24 +3,25 @@ import { connect } from "react-redux";
 
 import Controls from "../ Controls/index.jsx";
 import Preview from "../Preview/index.jsx";
-import { image } from "../../utils.js";
+import { img } from "../../utils.js";
 import "./styles.scss";
 
 import {
+  addBackgroundColor,
+  imageLoaded,
   setBackground,
-  setTextValue,
-  setTextColor,
-  clearPreview,
+  setBackgroundControl,
   setBackgroundDirection,
   setBackgroundGradient,
   setImage,
-  imageLoaded,
-  setImageHasError,
   setImageControl,
-  setTextControl,
-  setBackgroundControl,
-  addBackgroundColor,
+  setImageHasError,
+  setImageSize,
+  setInitialPreview,
   setFontSize,
+  setTextColor,
+  setTextControl,
+  setTextValue,
 } from "../../actions.js";
 
 const Main = ({
@@ -28,10 +29,12 @@ const Main = ({
   textControlIsActive,
   imageControlIsActive,
   preview,
+  fonts,
+  backgroundColorsLengthMax,
   dispatchSetBackground,
   dispatchSetTextValue,
   dispatchSetTextColor,
-  dispatchClearPreview,
+  dispatchSetInitialPreview,
   dispatchSetBackgroundDirection,
   dispatchSetBackgroundGradient,
   dispatchSetImage,
@@ -42,20 +45,22 @@ const Main = ({
   dispatchSetBackgroundControl,
   dispatchAddBackgroundColor,
   dispatchSetFontSize,
+  dispatchSetImageSize,
 }) => (
   <div className="main">
     <header className="header">
       <Controls
-        image={image}
+        img={img}
+        preview={preview}
+        fonts={fonts}
+        backgroundColorsLengthMax={backgroundColorsLengthMax}
+        imageControlIsActive={imageControlIsActive}
+        backgroundControlIsActive={backgroundControlIsActive}
+        textControlIsActive={textControlIsActive}
         imageLoaded={dispatchImageLoaded}
-        imageHasError={preview.imageHasError}
-        src={preview.image}
-        background={preview.background}
-        text={preview.text}
         setBackground={dispatchSetBackground}
         setTextValue={dispatchSetTextValue}
         setTextColor={dispatchSetTextColor}
-        clearPreview={dispatchClearPreview}
         setImage={dispatchSetImage}
         setBackgroundDirection={dispatchSetBackgroundDirection}
         setBackgroundGradient={dispatchSetBackgroundGradient}
@@ -63,20 +68,15 @@ const Main = ({
         setImageControl={dispatchSetImageControl}
         setBackgroundControl={dispatchSetBackgroundControl}
         setTextControl={dispatchSetTextControl}
-        imageControlIsActive={imageControlIsActive}
-        backgroundControlIsActive={backgroundControlIsActive}
-        textControlIsActive={textControlIsActive}
         addBackgroundColor={dispatchAddBackgroundColor}
         setFontSize={dispatchSetFontSize}
       />
     </header>
     <Preview
-      width={preview.width}
-      height={preview.height}
-      image={image}
-      imageIsLoaded={preview.imageIsLoaded}
-      text={preview.text}
-      background={preview.background}
+      preview={preview}
+      img={img}
+      setImageSize={dispatchSetImageSize}
+      setInitialPreview={dispatchSetInitialPreview}
     />
   </div>
 );
@@ -89,7 +89,7 @@ export default connect(mapStateToProps, {
   dispatchSetTextColor: setTextColor,
   dispatchSetImage: setImage,
   dispatchImageLoaded: imageLoaded,
-  dispatchClearPreview: clearPreview,
+  dispatchSetInitialPreview: setInitialPreview,
   dispatchSetBackgroundDirection: setBackgroundDirection,
   dispatchSetBackgroundGradient: setBackgroundGradient,
   dispatchSetImageHasError: setImageHasError,
@@ -98,4 +98,5 @@ export default connect(mapStateToProps, {
   dispatchSetTextControl: setTextControl,
   dispatchAddBackgroundColor: addBackgroundColor,
   dispatchSetFontSize: setFontSize,
+  dispatchSetImageSize: setImageSize,
 })(Main);

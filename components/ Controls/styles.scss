@@ -5,6 +5,7 @@
   $buttonColor: #000;
   $buttonActiveColor: #fff;
   $buttonHeight: 40px;
+  $borderColor: #e8e8e8;
 
   width: 100%;
   height: 100%;
@@ -135,7 +136,7 @@
     font-weight: 300;
     color: #000;
     height: $buttonHeight;
-    border: 2px solid #e8e8e8;
+    border: 2px solid $borderColor;
     background: #fff;
     padding: 0 10px;
     box-sizing: border-box;
@@ -161,11 +162,6 @@
     outline: none;
     border-color: transparent;
     background: $buttonBackground;
-
-    &_type_create {
-      position: absolute;
-      left: 0;
-    }
 
     &_type_add {
       font-size: 26px;
@@ -193,5 +189,14 @@
     border-radius: 0;
     box-sizing: border-box;
     cursor: pointer;
+    outline: none;
+    border-color: $borderColor;
+    border-width: 2px;
+
+    &:focus,
+    &:active {
+      outline: none;
+      border-color: $buttonActiveBackground;
+    }
   }
 }
