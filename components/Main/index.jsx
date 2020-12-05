@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Controls from "../ Controls/index.jsx";
+import Controls from "../Controls/index.jsx";
 import Preview from "../Preview/index.jsx";
 import { img } from "../../utils.js";
 import "./styles.scss";
@@ -13,6 +13,7 @@ import {
   setBackgroundControl,
   setBackgroundDirection,
   setBackgroundGradient,
+  setInitialImage,
   setImage,
   setImageControl,
   setImageHasError,
@@ -37,6 +38,7 @@ const Main = ({
   dispatchSetInitialPreview,
   dispatchSetBackgroundDirection,
   dispatchSetBackgroundGradient,
+  dispatchSetInitialImage,
   dispatchSetImage,
   dispatchImageLoaded,
   dispatchSetImageHasError,
@@ -70,6 +72,8 @@ const Main = ({
         setTextControl={dispatchSetTextControl}
         addBackgroundColor={dispatchAddBackgroundColor}
         setFontSize={dispatchSetFontSize}
+        setImageSize={dispatchSetImageSize}
+        setInitialImage={dispatchSetInitialImage}
       />
     </header>
     <Preview
@@ -99,4 +103,5 @@ export default connect(mapStateToProps, {
   dispatchAddBackgroundColor: addBackgroundColor,
   dispatchSetFontSize: setFontSize,
   dispatchSetImageSize: setImageSize,
+  dispatchSetInitialImage: setInitialImage,
 })(Main);

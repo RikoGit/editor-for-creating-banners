@@ -13,6 +13,7 @@ export const SET_FONT_SIZE = "SET_FONT_SIZE";
 export const SET_TEXT_COLOR = "SET_TEXT_COLOR";
 export const SET_TEXT_CONTROL = "SET_TEXT_CONTROL";
 export const SET_TEXT_VALUE = "SET_TEXT_VALUE";
+export const SET_INITIAL_IMAGE = "SET_INITIAL_IMAGE";
 
 export const setInitialPreview = () => ({ type: SET_INITIAL_PREVIEW });
 export const setBackgroundControl = () => ({ type: SET_BACKGROUND_CONTROL });
@@ -31,9 +32,18 @@ export const setFontSize = (value) => ({
   payload: value,
 });
 
-export const setImageSize = (width, height) => ({
+export const setInitialImage = () => ({ type: SET_INITIAL_IMAGE });
+
+export const setImageSize = ({
+  scaledWidth,
+  scaledHeight,
+  startX,
+  startY,
+  endX,
+  endY,
+}) => ({
   type: SET_IMAGE_SIZE,
-  payload: { width, height },
+  payload: { scaledWidth, scaledHeight, startX, startY, endX, endY },
 });
 
 export const setTextValue = (value) => ({

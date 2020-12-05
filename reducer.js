@@ -14,11 +14,13 @@ import {
   ADD_BACKGROUND_COLOR,
   SET_FONT_SIZE,
   SET_IMAGE_SIZE,
+  SET_INITIAL_IMAGE,
 } from "./actions.js";
 import { initialPreview } from "./initialPreview.js";
 
 export default (state, { type, payload }) => {
   switch (type) {
+    // clear all preview
     case SET_INITIAL_PREVIEW: {
       return {
         ...state,
@@ -31,6 +33,20 @@ export default (state, { type, payload }) => {
       };
     }
 
+    // clear image
+    case SET_INITIAL_IMAGE: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          image: {
+            ...initialPreview.image,
+            src: state.preview.image.src,
+          },
+        },
+      };
+    }
+
     case SET_FONT_SIZE: {
       return {
         ...state,
@@ -39,20 +55,6 @@ export default (state, { type, payload }) => {
           text: {
             ...state.preview.text,
             fontSize: payload,
-          },
-        },
-      };
-    }
-
-    case SET_IMAGE_SIZE: {
-      return {
-        ...state,
-        preview: {
-          ...state.preview,
-          image: {
-            ...state.preview.image,
-            width: payload.width,
-            height: payload.height,
           },
         },
       };
@@ -164,11 +166,36 @@ export default (state, { type, payload }) => {
     }
 
     case IMAGE_LOADED: {
+      console.log("load");
       return {
         ...state,
         preview: {
           ...state.preview,
-          image: { ...state.preview.image, isLoaded: payload },
+          image: {
+            ...state.preview.image,
+            //...initialPreview.image,
+            src: state.preview.image.src,
+            isLoaded: payload,
+          },
+        },
+      };
+    }
+
+    case SET_IMAGE_SIZE: {
+      console.log("size");
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          image: {
+            ...state.preview.image,
+            width: payload.scaledWidth,
+            height: payload.scaledHeight,
+            startX: payload.startX || initialPreview.image.startX,
+            startY: payload.startY || initialPreview.image.startY,
+            endX: payload.endX || initialPreview.image.endX,
+            endY: payload.endY || initialPreview.image.endY,
+          },
         },
       };
     }

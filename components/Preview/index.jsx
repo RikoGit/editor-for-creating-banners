@@ -8,29 +8,32 @@ const Preview = ({ preview, img, setImageSize, setInitialPreview }) => {
   const { width, height, text, background, image } = preview;
   const canvasRef = useRef(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext(`2d`);
-    drawPreview({ ctx, preview, img, setImageSize });
-  }, [background, text, image.isLoaded]);
-
+  {
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext(`2d`);
+      drawPreview({ ctx, preview, img, setImageSize });
+    }, [background, text, image.isLoaded]);
+  }
   return (
     <>
       <div className="preview">
+        <ExportPreview canvas={canvasRef} preview={preview} img={img} />
+        <button
+          type="button"
+          className="controls__button controls__button_type_create"
+          onClick={() =>
+            clearPreview({ canvasRef, width, height, setInitialPreview })
+          }
+          title="Создать новый"
+        >
+          Новый
+        </button>
+
         <canvas id="canvas" width={width} height={height} ref={canvasRef}>
           Браузер не поддерживает Canvas
         </canvas>
       </div>
-      <button
-        type="button"
-        className="controls__button controls__button_type_create"
-        onClick={() =>
-          clearPreview({ canvasRef, width, height, setInitialPreview })
-        }
-      >
-        Создать новый
-      </button>
-      <ExportPreview canvas={canvasRef} preview={preview} img={img} />
     </>
   );
 };

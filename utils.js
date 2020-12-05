@@ -12,34 +12,46 @@ export const clearPreview = ({
   setInitialPreview();
 };
 
-export const drawImage = ({ ctx, img, width, height, setImageSize }) => {
-  let x = 10;
-  let scaledWidth = img.width;
-  let scaledHeight = img.height;
+export const drawImage = ({ ctx, img, image, width, height, setImageSize }) => {
+  let startX = image.startX;
+  let startY = image.startY;
+  let endX = width;
+  let endY = height;
+  let scaledWidth = image.width;
+  let scaledHeight = image.height;
 
-  if (img.width < width - x && img.height < height - x) {
-    x = width - img.width;
-  } else if (img.width / (width - x) > img.height / (height - x)) {
-    scaledWidth = width - x;
-    scaledHeight = Math.floor(((width - x) * img.height) / img.width);
+  if (image.width <= width - startX && image.height <= height - startY) {
+    startX = width - image.width;
+  } else if (
+    image.width / (width - startX) >
+    image.height / (height - startX)
+  ) {
+    scaledWidth = width - startX;
+    scaledHeight = Math.floor(((width - startX) * image.height) / image.width);
   } else {
-    scaledWidth = Math.floor(((height - x) * img.width) / img.height);
-    scaledHeight = height - x;
-    x = width - scaledWidth;
+    scaledWidth = Math.floor(((height - startX) * image.width) / image.height);
+    scaledHeight = height - startX;
+    startX = width - scaledWidth;
   }
-  setImageSize(scaledWidth, scaledHeight);
-  ctx.drawImage(img, x, 0, scaledWidth, scaledHeight);
+  endY = scaledHeight;
+  setImageSize({ scaledWidth, scaledHeight, startX, startY, endX, endY });
+  ctx.drawImage(img, startX, startY, scaledWidth, scaledHeight);
 };
 
-export const drawText = (ctx, text, x, y, maxWidth, lineHeight) => {
+const drawText = (ctx, text, x, y, maxWidth, lineHeight) => {
   const words = text.split(" ");
   let line = "";
+  let linesCount = 1;
 
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + " ";
     const metrics = ctx.measureText(testLine);
     const testWidth = metrics.width;
     if (testWidth > maxWidth && n > 0) {
+      if (linesCount === 3) {
+        break;
+      }
+      linesCount += 1;
       ctx.fillText(line, x, y);
       line = words[n] + " ";
       y += lineHeight;
@@ -53,6 +65,10 @@ export const drawText = (ctx, text, x, y, maxWidth, lineHeight) => {
 
 export const drawPreview = ({ ctx, preview, img, setImageSize }) => {
   const { width, height, background, text, image } = preview;
+
+  console.log(
+    `width = ${image.width}; height = ${image.height}; width img = ${img.width}; height img = ${img.height}`
+  );
 
   if (background.length === 1) {
     ctx.fillStyle = background.colors[0];
@@ -75,11 +91,17 @@ export const drawPreview = ({ ctx, preview, img, setImageSize }) => {
   ctx.fillStyle = text.color;
 
   if (image.isLoaded) {
-    drawImage({ ctx, img, width, height, setImageSize });
+    drawImage({ ctx, img, image, width, height, setImageSize });
   }
   ctx.font = `${text.fontSize}px ${text.fontFamily}`;
-  //ctx.fillText(text.value, 20, 50, 260);
-  drawText(ctx, text.value, 10, 10, 200, text.lineHeight);
+  drawText(
+    ctx,
+    text.value,
+    text.startX,
+    text.startY,
+    width - 20,
+    text.lineHeight
+  );
 };
 
 export const downloadPreview = (canvas, downloadElement) => {
@@ -88,13 +110,75 @@ export const downloadPreview = (canvas, downloadElement) => {
   downloadElement.current.href = imageURI;
 };
 
-export const getHtml = (preview, img) => {
+export const getHtml = (preview) => {
   const { width, height, background, text, image } = preview;
 
-  navigator.clipboard.writeText(`<div class="banner">
-      <img src="${image.src}" width="${image.width}" height="${image.height}"/>
-      ${text}
-    </div>`);
+  navigator.clipboard.writeText(`<style>
+    .preview {
+        position: relative;
+        width: ${width}px;
+        height: ${height}px;
+        display: block;
+        ${
+          background.colors.length === 1
+            ? `background: ${background.colors[0]}`
+            : ""
+        };
+        ${
+          background.colors.length > 1 &&
+          background.gradient === "linear" &&
+          background.direction === "horizontal"
+            ? `background: linear-gradient(90deg, ${background.colors[0]} ${
+                background.percentages[0] * 100
+              }%, ${background.colors[1]} ${background.percentages[1] * 100}%)`
+            : ""
+        };
+        ${
+          background.colors.length > 1 &&
+          background.gradient === "linear" &&
+          background.direction === "vertical"
+            ? `background: linear-gradient(180deg, ${background.colors[0]} ${
+                background.percentages[0] * 100
+              }%, ${background.colors[1]} ${background.percentages[1] * 100}%)`
+            : ""
+        };
+        ${
+          background.colors.length > 1 && background.gradient === "radial"
+            ? `background: radial-gradient(${height}px ${height}px, ${background.colors[0]}, ${background.colors[1]});`
+            : ""
+        };
+    } 
+    .preview__image {
+        position: absolute;
+        left: ${image.startX}px;
+        top: ${image.startY}px;
+        z-index: 1;
+    }
+    .preview__text {
+        position: absolute;
+        left: ${text.startX}px;
+        top: ${text.startY}px;
+        max-width: ${width - 10}px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font: ${text.fontStyle} ${text.fontSize}px/${text.lineHeight}px ${
+    text.fontFamily
+  };
+  color: ${text.color};
+
+        z-index: 2;
+    }
+    </style>
+      <a class="preview">
+      ${
+        image.isLoaded && image.src
+          ? `<img class="preview__image" src=${encodeURI(image.src)} width=${
+              image.width
+            } height=${image.height}/>`
+          : ""
+      }
+      ${text.value ? `<span class="preview__text">${text.value}</span>` : ""}
+      </a>`);
 };
 
 export const getJson = (preview) =>

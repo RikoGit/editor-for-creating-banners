@@ -9,27 +9,30 @@ const ExportPreview = ({ canvas, preview, img }) => {
   return (
     <div className="export">
       <a
-        className="export__button"
+        className="export__button export__button_type_download"
         download="preview.png"
         href=""
         ref={downloadRef}
         onClick={() => downloadPreview(canvas, downloadRef)}
+        title="Сохранить как PNG"
       >
-        Сохранить в png
+        PNG
       </a>
       <button
         type="button"
-        className="export__button"
+        className="export__button export__button_type_copy"
         onClick={() => getHtml(preview, img)}
+        title="Скопировать как html"
       >
-        Скопировать
+        html
       </button>
       <button
         type="button"
-        className="export__button"
+        className="export__button export__button_type_copy"
         onClick={() => getJson(preview)}
+        title="Скопировать как json строку"
       >
-        Скопировать как json строку
+        json
       </button>
     </div>
   );

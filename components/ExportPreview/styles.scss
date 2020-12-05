@@ -1,0 +1,43 @@
+@import "../../constants.scss";
+
+.export {
+  $buttonHeight: 55px;
+
+  position: absolute;
+  top: 110px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  &__button {
+    width: 100px;
+    margin: 0 50px 10px 0;
+    padding: 10px 10px 10px 40px;
+    height: $buttonHeight;
+    border: 2px solid $borderColor;
+    display: block;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 32px;
+    text-decoration: none;
+    color: $buttonColor;
+    box-sizing: border-box;
+
+    &_type_copy {
+      background: $buttonBackground url("../../docs/image/copy_icon.png") 5px
+        8px no-repeat;
+    }
+
+    &_type_download {
+      background: $buttonBackground url("../../docs/image/download_icon.png")
+        5px 8px no-repeat;
+    }
+
+    &:focus,
+    &:active {
+      border-color: $buttonActiveBackground;
+      outline: none;
+    }
+  }
+}
