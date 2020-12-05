@@ -205,7 +205,7 @@ const Controls = ({
               >
                 <div className="controls__radiogroup">
                   <label
-                    className={`controls__label${
+                    className={`controls__label controls__label_type_linear${
                       background.gradient === "linear"
                         ? " controls__label_active"
                         : ""
@@ -221,10 +221,10 @@ const Controls = ({
                         setBackgroundGradient(event.target.value)
                       }
                     />
-                    линейный
+                    <span className="controls__text">линейный</span>
                   </label>
                   <label
-                    className={`controls__label${
+                    className={`controls__label controls__label_type_radial${
                       background.gradient === "radial"
                         ? " controls__label_active"
                         : ""
@@ -240,7 +240,7 @@ const Controls = ({
                         setBackgroundGradient(event.target.value)
                       }
                     />
-                    радиальный
+                    <span className="controls__text">радиальный</span>
                   </label>
                 </div>
                 <div
@@ -251,7 +251,7 @@ const Controls = ({
                   }`}
                 >
                   <label
-                    className={`controls__label${
+                    className={`controls__label controls__label_type_horizontal${
                       background.direction === "horizontal"
                         ? " controls__label_active"
                         : ""
@@ -267,10 +267,10 @@ const Controls = ({
                         setBackgroundDirection(event.target.value)
                       }
                     />
-                    горизонтальный
+                    <span className="controls__text">горизонтальный</span>
                   </label>
                   <label
-                    className={`controls__label${
+                    className={`controls__label controls__label_type_vertical${
                       background.direction === "vertical"
                         ? " controls__label_active"
                         : ""
@@ -286,7 +286,7 @@ const Controls = ({
                         setBackgroundDirection(event.target.value)
                       }
                     />
-                    вертикальный
+                    <span className="controls__text">вертикальный</span>
                   </label>
                 </div>
               </div>
@@ -304,7 +304,7 @@ const Controls = ({
               }`}
               >*/}
               <input
-                className="controls__input"
+                className="controls__input controls__input_type_link"
                 type="text"
                 placeholder="Введите ссылку"
                 value={link}

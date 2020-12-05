@@ -18,7 +18,9 @@ const Preview = ({ preview, img, setImageSize, setInitialPreview }) => {
   return (
     <>
       <div className="preview">
-        <ExportPreview canvas={canvasRef} preview={preview} img={img} />
+        <canvas id="canvas" width={width} height={height} ref={canvasRef}>
+          Браузер не поддерживает Canvas
+        </canvas>
         <button
           type="button"
           className="controls__button controls__button_type_create"
@@ -29,10 +31,7 @@ const Preview = ({ preview, img, setImageSize, setInitialPreview }) => {
         >
           Новый
         </button>
-
-        <canvas id="canvas" width={width} height={height} ref={canvasRef}>
-          Браузер не поддерживает Canvas
-        </canvas>
+        <ExportPreview canvas={canvasRef} preview={preview} img={img} />
       </div>
     </>
   );

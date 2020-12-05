@@ -11,6 +11,10 @@
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
+
+    @media only screen and (max-width: 610px) {
+      padding: 0 10px;
+    }
   }
 
   &__main {
@@ -89,10 +93,43 @@
       color: $buttonActiveColor;
       cursor: default;
     }
+
+    @media only screen and (max-width: 380px) {
+      width: 20px;
+      background-repeat: no-repeat;
+      background-size: 20px;
+      background-position: center;
+
+      &_type_linear {
+        background-image: url(../../docs/image/line_icon.png);
+      }
+
+      &_type_radial {
+        background-image: url(../../docs/image/circle_icon.png);
+      }
+
+      &_type_horizontal {
+        background-image: url(../../docs/image/horizontal-arrows_icon.png);
+      }
+
+      &_type_vertical {
+        background-image: url(../../docs/image/vertical-arrows_icon.png);
+      }
+    }
+  }
+
+  @media only screen and (max-width: 380px) {
+    &__text {
+      display: none;
+    }
   }
 
   &__radiogroup {
     margin: 2px 5px;
+
+    @media only screen and (max-width: 380px) {
+      margin: -1px 5px;
+    }
   }
 
   &__radiogroup_type_disable &__label {
@@ -118,10 +155,6 @@
     }
   }
 
-  &__input {
-    width: 300px;
-  }
-
   &__input,
   &__select {
     margin: 5px;
@@ -140,6 +173,28 @@
     &:focus {
       border-color: #6495ed;
       outline: none;
+    }
+  }
+
+  &__input {
+    width: 300px;
+
+    @media only screen and (max-width: 610px) {
+      width: 200px;
+    }
+
+    @media only screen and (max-width: 320px) {
+      width: 180px;
+    }
+
+    &_type_link {
+      width: 300px;
+    }
+  }
+
+  &__select {
+    @media only screen and (max-width: 610px) {
+      padding: 0;
     }
   }
 
@@ -172,6 +227,21 @@
       width: 100px;
       position: absolute;
       right: 50px;
+
+      @media only screen and (max-width: 900px) {
+        right: 0;
+      }
+
+      @media only screen and (max-width: 610px) {
+        width: 80px;
+        top: auto;
+        bottom: $previewPaddingMin;
+        left: $previewPaddingMin;
+      }
+
+      @media only screen and (max-width: 370px) {
+        width: 60px;
+      }
     }
 
     &_type_active {
