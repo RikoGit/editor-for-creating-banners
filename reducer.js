@@ -2,6 +2,7 @@ import {
   SET_INITIAL_PREVIEW,
   SET_BACKGROUND,
   SET_IMAGE,
+  SET_LINK,
   IMAGE_LOADED,
   SET_TEXT_VALUE,
   SET_TEXT_COLOR,
@@ -15,6 +16,7 @@ import {
   SET_FONT_SIZE,
   SET_IMAGE_SIZE,
   SET_INITIAL_IMAGE,
+  SET_LINK_CONTROL,
 } from "./actions.js";
 import { initialPreview } from "./initialPreview.js";
 
@@ -88,10 +90,21 @@ export default (state, { type, payload }) => {
       };
     }
 
+    case SET_LINK_CONTROL: {
+      return {
+        ...state,
+        linkControlIsActive: !state.linkControlIsActive,
+        imageControlIsActive: false,
+        textControlIsActive: false,
+        backgroundControlIsActive: false,
+      };
+    }
+
     case SET_BACKGROUND_CONTROL: {
       return {
         ...state,
         backgroundControlIsActive: !state.backgroundControlIsActive,
+        linkControlIsActive: false,
         imageControlIsActive: false,
         textControlIsActive: false,
       };
@@ -101,6 +114,7 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         imageControlIsActive: !state.imageControlIsActive,
+        linkControlIsActive: false,
         backgroundControlIsActive: false,
         textControlIsActive: false,
       };
@@ -110,6 +124,7 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         textControlIsActive: !state.textControlIsActive,
+        linkControlIsActive: false,
         imageControlIsActive: false,
         backgroundControlIsActive: false,
       };
@@ -151,6 +166,16 @@ export default (state, { type, payload }) => {
         preview: {
           ...state.preview,
           text: { ...state.preview.text, color: payload },
+        },
+      };
+    }
+
+    case SET_LINK: {
+      return {
+        ...state,
+        preview: {
+          ...state.preview,
+          link: payload,
         },
       };
     }

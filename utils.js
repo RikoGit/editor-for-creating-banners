@@ -66,10 +66,6 @@ const drawText = (ctx, text, x, y, maxWidth, lineHeight) => {
 export const drawPreview = ({ ctx, preview, img, setImageSize }) => {
   const { width, height, background, text, image } = preview;
 
-  console.log(
-    `width = ${image.width}; height = ${image.height}; width img = ${img.width}; height img = ${img.height}`
-  );
-
   if (background.length === 1) {
     ctx.fillStyle = background.colors[0];
   } else {
@@ -99,7 +95,7 @@ export const drawPreview = ({ ctx, preview, img, setImageSize }) => {
     text.value,
     text.startX,
     text.startY,
-    width - 20,
+    width - 40,
     text.lineHeight
   );
 };
@@ -111,7 +107,7 @@ export const downloadPreview = (canvas, downloadElement) => {
 };
 
 export const getHtml = (preview) => {
-  const { width, height, background, text, image } = preview;
+  const { width, height, background, text, image, link } = preview;
 
   navigator.clipboard.writeText(`<style>
     .preview {
@@ -169,7 +165,7 @@ export const getHtml = (preview) => {
         z-index: 2;
     }
     </style>
-      <a class="preview">
+      <a class="preview" href=${encodeURI(link)} target="_blank">
       ${
         image.isLoaded && image.src
           ? `<img class="preview__image" src=${encodeURI(image.src)} width=${

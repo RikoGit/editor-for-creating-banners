@@ -6,6 +6,7 @@ const Controls = ({
   imageControlIsActive,
   backgroundControlIsActive,
   textControlIsActive,
+  linkControlIsActive,
   img,
   preview,
   fonts,
@@ -18,7 +19,9 @@ const Controls = ({
   setBackgroundGradient,
   addBackgroundColor,
   setImage,
+  setLink,
   setImageHasError,
+  setLinkControl,
   setImageControl,
   setTextControl,
   setBackgroundControl,
@@ -26,7 +29,7 @@ const Controls = ({
   setInitialImage,
   setImageSize,
 }) => {
-  const { text, image, background } = preview;
+  const { text, image, background, link } = preview;
 
   const uploadImage = () => {
     if (!image.src) return;
@@ -85,11 +88,21 @@ const Controls = ({
           >
             Фон
           </button>
+          <button
+            type="button"
+            className={`controls__button${
+              linkControlIsActive ? " controls__button_type_active" : ""
+            }`}
+            onClick={setLinkControl}
+          >
+            Ссылка
+          </button>
         </div>
         <div
           className={`controls__more${
             imageControlIsActive ||
             backgroundControlIsActive ||
+            linkControlIsActive ||
             textControlIsActive
               ? " controls__more_active"
               : ""
@@ -278,6 +291,28 @@ const Controls = ({
                 </div>
               </div>
             )}
+          </div>
+          <div
+            className={`controls__detail${
+              linkControlIsActive ? " controls__detail_type_active" : ""
+            }`}
+          >
+            <label className="controls__label">
+              {/*<label
+              className={`controls__label${
+                link.hasError ? " controls__label_type_error" : ""
+              }`}
+              >*/}
+              <input
+                className="controls__input"
+                type="text"
+                placeholder="Введите ссылку"
+                value={link}
+                onChange={(event) => setLink(event.target.value)}
+              ></input>
+              {/*<span className="controls__note">ПРИМЕЧАНИЕ</span>
+              <span className="controls__error">ОШИБКА</span>*/}
+            </label>
           </div>
         </div>
       </div>

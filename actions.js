@@ -9,6 +9,8 @@ export const SET_IMAGE_CONTROL = "SET_IMAGE_CONTROL";
 export const SET_IMAGE_HAS_ERROR = "SET_IMAGE_HAS_ERROR";
 export const SET_IMAGE_SIZE = "SET_IMAGE_SIZE";
 export const SET_INITIAL_PREVIEW = "SET_INITIAL_PREVIEW";
+export const SET_LINK = "SET_LINK";
+export const SET_LINK_CONTROL = "SET_LINK_CONTROL";
 export const SET_FONT_SIZE = "SET_FONT_SIZE";
 export const SET_TEXT_COLOR = "SET_TEXT_COLOR";
 export const SET_TEXT_CONTROL = "SET_TEXT_CONTROL";
@@ -18,6 +20,7 @@ export const SET_INITIAL_IMAGE = "SET_INITIAL_IMAGE";
 export const setInitialPreview = () => ({ type: SET_INITIAL_PREVIEW });
 export const setBackgroundControl = () => ({ type: SET_BACKGROUND_CONTROL });
 export const setImageControl = () => ({ type: SET_IMAGE_CONTROL });
+export const setLinkControl = () => ({ type: SET_LINK_CONTROL });
 export const setTextControl = () => ({ type: SET_TEXT_CONTROL });
 
 export const addBackgroundColor = () => ({ type: ADD_BACKGROUND_COLOR });
@@ -53,6 +56,11 @@ export const setTextValue = (value) => ({
 
 export const setImage = (value) => ({
   type: SET_IMAGE,
+  payload: value,
+});
+
+export const setLink = (value) => ({
+  type: SET_LINK,
   payload: value,
 });
 

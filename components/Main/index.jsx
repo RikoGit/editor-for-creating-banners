@@ -15,6 +15,7 @@ import {
   setBackgroundGradient,
   setInitialImage,
   setImage,
+  setLink,
   setImageControl,
   setImageHasError,
   setImageSize,
@@ -23,12 +24,14 @@ import {
   setTextColor,
   setTextControl,
   setTextValue,
+  setLinkControl,
 } from "../../actions.js";
 
 const Main = ({
   backgroundControlIsActive,
   textControlIsActive,
   imageControlIsActive,
+  linkControlIsActive,
   preview,
   fonts,
   backgroundColorsLengthMax,
@@ -40,6 +43,7 @@ const Main = ({
   dispatchSetBackgroundGradient,
   dispatchSetInitialImage,
   dispatchSetImage,
+  dispatchSetLink,
   dispatchImageLoaded,
   dispatchSetImageHasError,
   dispatchSetTextControl,
@@ -48,6 +52,7 @@ const Main = ({
   dispatchAddBackgroundColor,
   dispatchSetFontSize,
   dispatchSetImageSize,
+  dispatchSetLinkControl,
 }) => (
   <div className="main">
     <header className="header">
@@ -58,14 +63,17 @@ const Main = ({
         backgroundColorsLengthMax={backgroundColorsLengthMax}
         imageControlIsActive={imageControlIsActive}
         backgroundControlIsActive={backgroundControlIsActive}
+        linkControlIsActive={linkControlIsActive}
         textControlIsActive={textControlIsActive}
         imageLoaded={dispatchImageLoaded}
         setBackground={dispatchSetBackground}
         setTextValue={dispatchSetTextValue}
         setTextColor={dispatchSetTextColor}
         setImage={dispatchSetImage}
+        setLink={dispatchSetLink}
         setBackgroundDirection={dispatchSetBackgroundDirection}
         setBackgroundGradient={dispatchSetBackgroundGradient}
+        setLinkControl={dispatchSetLinkControl}
         setImageHasError={dispatchSetImageHasError}
         setImageControl={dispatchSetImageControl}
         setBackgroundControl={dispatchSetBackgroundControl}
@@ -92,12 +100,14 @@ export default connect(mapStateToProps, {
   dispatchSetTextValue: setTextValue,
   dispatchSetTextColor: setTextColor,
   dispatchSetImage: setImage,
+  dispatchSetLink: setLink,
   dispatchImageLoaded: imageLoaded,
   dispatchSetInitialPreview: setInitialPreview,
   dispatchSetBackgroundDirection: setBackgroundDirection,
   dispatchSetBackgroundGradient: setBackgroundGradient,
   dispatchSetImageHasError: setImageHasError,
   dispatchSetImageControl: setImageControl,
+  dispatchSetLinkControl: setLinkControl,
   dispatchSetBackgroundControl: setBackgroundControl,
   dispatchSetTextControl: setTextControl,
   dispatchAddBackgroundColor: addBackgroundColor,

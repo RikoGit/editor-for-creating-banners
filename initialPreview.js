@@ -1,6 +1,7 @@
 export const initialPreview = {
   width: 300,
   height: 400,
+  link: "",
   image: {
     src: "",
     width: 0,
@@ -16,7 +17,7 @@ export const initialPreview = {
     fontSize: 30,
     lineHeight: 30,
     startX: 20,
-    startY: 150,
+    startY: 250,
     endX: 300,
     endY: 400,
     fontStyle: "normal",
