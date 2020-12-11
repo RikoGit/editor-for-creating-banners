@@ -9,7 +9,7 @@ const initialState = {
   textControlIsActive: false,
   linkControlIsActive: false,
   fonts: [8, 10, 12, 14, 16, 18, 20, 24, 28, 30, 36, 40, 46, 52, 58, 60],
-  backgroundColorsLengthMax: 2,
+  backgroundColorsLengthMax: 4,
   preview: {
     ...initialPreview,
     image: { ...initialPreview.image },

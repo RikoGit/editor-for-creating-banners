@@ -94,7 +94,8 @@
       cursor: default;
     }
 
-    @media only screen and (max-width: 380px) {
+    @media only screen and (max-width: 520px) {
+      padding: 0 6px;
       width: 20px;
       background-repeat: no-repeat;
       background-size: 20px;
@@ -118,7 +119,7 @@
     }
   }
 
-  @media only screen and (max-width: 380px) {
+  @media only screen and (max-width: 520px) {
     &__text {
       display: none;
     }
@@ -127,7 +128,7 @@
   &__radiogroup {
     margin: 2px 5px;
 
-    @media only screen and (max-width: 380px) {
+    @media only screen and (max-width: 520px) {
       margin: -1px 5px;
     }
   }

@@ -109,41 +109,31 @@ export const downloadPreview = (canvas, downloadElement) => {
 export const getHtml = (preview) => {
   const { width, height, background, text, image, link } = preview;
 
+  let backgroundPreview = background.colors[0];
+
+  if (background.colors.length > 1) {
+    const backgroundPreviewLinear = background.colors
+      .map((color, index) => `${color} ${background.percentages[index] * 100}%`)
+      .join(",");
+
+    if (background.gradient === "linear") {
+      const angle = background.direction === "horizontal" ? "90deg" : "180deg";
+      backgroundPreview = `linear-gradient(${angle}, ${backgroundPreviewLinear})`;
+    }
+
+    if (background.gradient === "radial") {
+      backgroundPreview = `radial-gradient(${height}px ${height}px, ${backgroundPreviewLinear})`;
+    }
+  }
+
   navigator.clipboard.writeText(`<style>
     .preview {
         position: relative;
         width: ${width}px;
         height: ${height}px;
         display: block;
-        ${
-          background.colors.length === 1
-            ? `background: ${background.colors[0]}`
-            : ""
-        };
-        ${
-          background.colors.length > 1 &&
-          background.gradient === "linear" &&
-          background.direction === "horizontal"
-            ? `background: linear-gradient(90deg, ${background.colors[0]} ${
-                background.percentages[0] * 100
-              }%, ${background.colors[1]} ${background.percentages[1] * 100}%)`
-            : ""
-        };
-        ${
-          background.colors.length > 1 &&
-          background.gradient === "linear" &&
-          background.direction === "vertical"
-            ? `background: linear-gradient(180deg, ${background.colors[0]} ${
-                background.percentages[0] * 100
-              }%, ${background.colors[1]} ${background.percentages[1] * 100}%)`
-            : ""
-        };
-        ${
-          background.colors.length > 1 && background.gradient === "radial"
-            ? `background: radial-gradient(${height}px ${height}px, ${background.colors[0]}, ${background.colors[1]});`
-            : ""
-        };
-    } 
+        background: ${backgroundPreview};
+      } 
     .preview__image {
         position: absolute;
         left: ${image.startX}px;
@@ -160,12 +150,11 @@ export const getHtml = (preview) => {
         font: ${text.fontStyle} ${text.fontSize}px/${text.lineHeight}px ${
     text.fontFamily
   };
-  color: ${text.color};
-
+        color: ${text.color};
         z-index: 2;
     }
     </style>
-      <a class="preview" href=${encodeURI(link)} target="_blank">
+      <a class="preview" href=${encodeURI(link)} target="_blank" rel="noopener">
       ${
         image.isLoaded && image.src
           ? `<img class="preview__image" src=${encodeURI(image.src)} width=${

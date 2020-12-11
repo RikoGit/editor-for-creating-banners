@@ -77,9 +77,16 @@ export default (state, { type, payload }) => {
 
     case ADD_BACKGROUND_COLOR: {
       const colors = [...state.preview.background.colors];
-      const percentages = [...state.preview.background.percentages];
       colors.push("#ffffff");
-      percentages.push(1);
+
+      const percentages = [0, 1];
+      const percentagesLength = colors.length;
+      if (percentagesLength > 2) {
+        const percentagesStep = 1 / (percentagesLength - 1);
+        for (let i = 0; i < percentagesLength - 2; i++) {
+          percentages.splice(i + 1, 0, (percentagesStep * (i + 1)).toFixed(1));
+        }
+      }
 
       return {
         ...state,
